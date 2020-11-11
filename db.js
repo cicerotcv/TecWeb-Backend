@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://root:root123@cluster0.wtnp6.mongodb.net');
+mongoose.connect('mongodb+srv://root:root123@cluster0.wtnp6.mongodb.net/stockmern?retryWrites=true&w=majority');
 
 
 
