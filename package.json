@@ -1,0 +1,26 @@
+{
+  "name": "mern",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "chart.js": "^2.9.4",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "8.2.0",
+    "ejs": "~2.6.1",
+    "express": "4.17.1",
+    "http-errors": "~1.6.3",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.12",
+    "morgan": "~1.9.1",
+    "react-chartjs-2": "^2.11.1",
+    "toaster-js": "^2.2.3",
+    "toastr": "^2.1.4",
+    "unirest": "^0.6.0"
+  }
+}
