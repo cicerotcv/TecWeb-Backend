@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 const User = require('../models/user');
 
@@ -25,12 +26,18 @@ router.post('/signin', async (req, res) => {
             });
         }
         // busca de user no banco de dados
-        const user = await User.findOne({ username, password });
+        const user = await User.findOne({ username });
         // se user não existir
         if (!user) {
             return res.json({ login: false });
         }
-        // se user existir
+        // se user existir, encriptamos a senha recebida e comparamos com a armazenada
+        if (!(await bcrypt.compare(password, user.password))) {
+            return res
+                .status(401) // 401: Unauthorized
+                .send({ error: 'Invalid password' }); // descrição do erro
+        }
+        user.password = undefined;
         return res.json({ login: true, user });
     } catch (e) {
         console.log(e);
