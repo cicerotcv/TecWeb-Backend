@@ -14,21 +14,28 @@ router.get('/', async (req, res) => {
 });
 
 /* Login */
-router.post('/signin', function (req, res) {
-    const { username, password } = req.body;
-    User.findOne({ username, password }, function (err, doc) {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            res.end();
-            return;
-        } else if (doc.length === 0) {
-            res.json({ login: false });
-            return;
-        } else {
-            res.json({ login: true, user: doc });
-            res.end();
+router.post('/signin', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        // se username ou password em branco
+        if (!username || !password) {
+            return res.json({
+                login: false,
+                message: 'Username ou Password não preenchido'
+            });
         }
-    });
+        // busca de user no banco de dados
+        const user = await User.findOne({ username, password });
+        // se user não existir
+        if (!user) {
+            return res.json({ login: false });
+        }
+        // se user existir
+        return res.json({ login: true, user });
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send({ error: 'Não foi possível fazer login' });
+    }
 });
 
 /* Sign Up */
