@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start-dev": "nodemon index.js",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
     "preset": "@shelf/jest-mongodb"
   },
